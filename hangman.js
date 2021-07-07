@@ -15,12 +15,58 @@
 // 2. Display the guesses left to the browser instead of console
 // 3. Seperate the Hangman definition from the rest of the app code (use app.js)
 
+// 1. Setup new 'status' property with an initial value of 'playing'
+// 2. Create a method for recalculating status to 'playing', 'finished', or 'failed'
+// 3. Call that method after a guess is processed
+// 4. Use console.log to print the status
+
+// Start the game and see 'playing'
+// Make two incorrect guesses to see 'failed'
+// Refresh the browser and guess 'c', 'a', and 't' to see 'finished'
+
 const Hangman = function (word, guessesRemaining) {
     this.word = word.toLowerCase().split("")
     this.guessesRemaining = guessesRemaining
     this.guessedLetters = []
+    this.status = 'playing'
+
   
     }
+
+Hangman.prototype.updateStatus = function () {
+    let finished = true
+    this.word.forEach((letter) => {
+        if (this.guessedLetters.includes(letter)) {
+
+        } else {
+            finished = false
+        }
+    })
+
+    if (this.guessesRemaining === 0) {
+        this.status = 'failed'
+    } else if (finished) {
+        this.status = 'finished'
+    } else {
+        this.status = 'playing'
+    }
+}  
+
+
+// The drawback of this alternative is: it is sensitive to the order of letters in guessedLetters
+// Hangman.prototype.updateStatus = function () {
+//     const aboveZero = this.guessesRemaining > 0
+//     const foundAll = JSON.stringify(this.word) === JSON.stringify(this.guessedLetters)
+
+//     if (aboveZero && foundAll) {
+//         this.status = 'finished'
+//     } else if (aboveZero) {
+//         this.status = 'playing'
+//     } else {
+//         this.status = 'failed'
+//     }
+//     return this.status
+// }
 
 
 Hangman.prototype.getPuzzle = function () {
@@ -48,18 +94,7 @@ Hangman.prototype.makeGuess = function (guess) {
     if (uniqueGuess && badGuess) {
         this.guessesRemaining--
     }
+    this.updateStatus()
 }
 
-
-
-const me = new Hangman('Alex Sanchez', 2)
-
-console.log(me.getPuzzle());
-console.log(me.guessesRemaining);
-
-window.addEventListener('keypress', function (e) {
-    const guess = String.fromCharCode(e.charCode)
-    me.makeGuess(guess)
-    console.log(me.getPuzzle());
-    console.log(me.guessesRemaining);
-})
+ 
