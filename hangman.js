@@ -24,6 +24,13 @@
 // Make two incorrect guesses to see 'failed'
 // Refresh the browser and guess 'c', 'a', and 't' to see 'finished'
 
+// 1. Disable new guesses unless "playing"
+// 2. Setup a new method to get back a status message
+
+// Playing -> Guesses left: 3
+// Failed -> Nice try! The word was "Cat".
+// Finished -> Great work! You guessed the word.
+
 const Hangman = function (word, guessesRemaining) {
     this.word = word.toLowerCase().split("")
     this.guessesRemaining = guessesRemaining
@@ -33,15 +40,19 @@ const Hangman = function (word, guessesRemaining) {
   
     }
 
-Hangman.prototype.updateStatus = function () {
-    let finished = true
-    this.word.forEach((letter) => {
-        if (this.guessedLetters.includes(letter)) {
+Hangman.prototype.updateMessage = function () {
 
-        } else {
-            finished = false
-        }
-    })
+    if (this.status === 'playing') {
+        return `Guesses left: ${this.guessesRemaining}`
+    } else if (this.status === 'failed') {
+        return `Nice try! The word was "${this.word.join("")}"`
+    } else {
+        return 'Great work! You guessed the word'
+    }
+}
+
+Hangman.prototype.updateStatus = function () {
+    const finished = this.word.every((letter) => this.guessedLetters.includes(letter))
 
     if (this.guessesRemaining === 0) {
         this.status = 'failed'
@@ -84,17 +95,20 @@ Hangman.prototype.getPuzzle = function () {
 }
 
 Hangman.prototype.makeGuess = function (guess) {
-    guess = guess.toLowerCase()
-    const uniqueGuess = !this.guessedLetters.includes(guess)
-    const badGuess = !this.word.includes(guess)
+    if (this.status === 'playing') {
+        guess = guess.toLowerCase()
+        const uniqueGuess = !this.guessedLetters.includes(guess)
+        const badGuess = !this.word.includes(guess)
 
-    if (uniqueGuess) {
-        this.guessedLetters.push(guess)
+        if (uniqueGuess) {
+            this.guessedLetters.push(guess)
+        }
+        if (uniqueGuess && badGuess) {
+            this.guessesRemaining--
+        }
+        this.updateStatus()
     }
-    if (uniqueGuess && badGuess) {
-        this.guessesRemaining--
-    }
-    this.updateStatus()
+    
 }
 
  
