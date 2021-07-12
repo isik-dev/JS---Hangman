@@ -31,6 +31,9 @@
 // Failed -> Nice try! The word was "Cat".
 // Finished -> Great work! You guessed the word.
 
+// 1. Convert "getStatusMessage" to a custom getter for "statusMessage"
+// 2. Convert "getPuzzle" to a custom getter for "puzzle"
+// 3. Change usage in app.js
 class Hangman {
     constructor(word, guessesRemaining) {
         this.word = word.toLowerCase().split("")
@@ -38,7 +41,7 @@ class Hangman {
         this.guessedLetters = []
         this.status = 'playing'
     }
-    updateMessage() {
+    get statusMessage () {
         if (this.status === 'playing') {
             return `Guesses left: ${this.guessesRemaining}`
         } else if (this.status === 'failed') {
@@ -48,7 +51,7 @@ class Hangman {
         } 
     }
     updateStatus() {
-        const finished = this.word.every((letter) => this.guessedLetters.includes(letter))
+        const finished = this.word.every((letter) => this.guessedLetters.includes(letter) || letter === ' ')
 
         if (this.guessesRemaining === 0) {
             this.status = 'failed'
@@ -58,7 +61,7 @@ class Hangman {
             this.status = 'playing'
         }
     }
-    getPuzzle() {
+    get puzzle () {
         let puzzle = ''
 
         this.word.forEach((letter) => {
