@@ -30,18 +30,28 @@ window.addEventListener('keypress', (e) => {
     console.log(game1.status);
 })
 
-getPuzzle((error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`);
-    } else {
-        console.log(puzzle);
-    }
-    
+// we are calling getPuzzle here and fetching the return value into the puzzle variable !!!!!!!!!!!
+getPuzzle((puzzle) => {
+    console.log(puzzle)
 })
 
 
+const result = regFunc(8)
+console.log(result);
 
-// Making an HTTP request
+const cbresult = cbFunc(15)
+console.log(cbresult);
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 1. Make a new request for all countries
@@ -49,18 +59,30 @@ getPuzzle((error, puzzle) => {
 // 3. Find your country object by its country code (alpha2Code property)
 // 4. Print the full country name (name property)
 
-// const countryCode = 'KR'
-// const countryRequest = new XMLHttpRequest()
+// 1. Create a new function for getting country details
+// 2. Call it with two arguments: country code, the callback function
+// 3. Make the HTTP request and call the callback with country information
+// 4. Use the callback to print the country name
 
-// countryRequest.addEventListener('readystatechange', (e) => {
-//     if (e.target.readyState === 4 && e.target.status === 200) {
-//         const data = JSON.parse(e.target.responseText)
-//         const country = data.find((country) => country.alpha2Code === countryCode)
-//         console.log(country.name);
-//     } else if (e.target.readyState === 4) {
-//         console.log('Unable to fetch data');
-//     }
-// })
+// Making an HTTP request
 
-// countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-// countryRequest.send()
+
+// const getCountry = (countryCode, callback) => {
+
+//     const countryRequest = new XMLHttpRequest()
+    
+//     countryRequest.addEventListener('readystatechange', (e) => {
+//         if (e.target.readyState === 4 && e.target.status === 200) {
+//             const data = JSON.parse(e.target.responseText)
+//             const country = data.find((country) => country.alpha2Code === countryCode)
+//             callback(undefined, country)
+//         } else if (e.target.readyState === 4) {
+//             callback('An error has taken place', undefined)
+//         }
+//     })
+    
+//     countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
+//     countryRequest.send()
+
+
+
