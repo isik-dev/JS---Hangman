@@ -30,14 +30,13 @@ window.addEventListener("keypress", (e) => {
 
 // we are calling getPuzzle here and fetching the return value into the puzzle variable !!!!!!!!!!!
 
-getPuzzle("2").then(
-  (puzzle) => {
+getPuzzle(2)
+  .then((puzzle) => {
     console.log(puzzle);
-  },
-  (error) => {
-    console.log(`Error: ${error}`);
-  }
-);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 // getSquareIfEven((error, number) => {
 //     if (error) {
@@ -67,3 +66,18 @@ getCountry("KR").then(
     console.log(`Error is: ${error}`);
   }
 );
+
+// fetch("http://puzzle.mead.io/puzzle", {})
+//   .then((response) => {
+//     if (response.status === 200) {
+//       return response.json();
+//     } else {
+//       throw new Error("Unable to fetch the puzzle");
+//     }
+//   })
+//   .then((data) => {
+//     console.log(data.puzzle);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
