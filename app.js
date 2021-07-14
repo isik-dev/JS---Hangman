@@ -56,16 +56,19 @@ getPuzzle(2)
 // 3. Make the HTTP request and call the callback with country information
 // 4. Use the callback to print the country name
 
+// 1. Convert getCountry to use fetch and return a promise
+// 2. Make sure getCountry still resolves with the country that matches
+// 3. Manage getCountry usage to use catch
+
 // Making an HTTP request
 
-getCountry("KR").then(
-  (country) => {
+getCountry("US")
+  .then((country) => {
     console.log(country.name);
-  },
-  (error) => {
-    console.log(`Error is: ${error}`);
-  }
-);
+  })
+  .catch((error) => {
+    console.log(`Error: ${error}`);
+  });
 
 // fetch("http://puzzle.mead.io/puzzle", {})
 //   .then((response) => {
