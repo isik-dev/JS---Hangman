@@ -30,13 +30,14 @@ window.addEventListener("keypress", (e) => {
 
 // we are calling getPuzzle here and fetching the return value into the puzzle variable !!!!!!!!!!!
 
-getPuzzle("3", (error, puzzle) => {
-  if (error) {
-    console.log(`Error is: ${error}`);
-  } else {
+getPuzzle("2").then(
+  (puzzle) => {
     console.log(puzzle);
+  },
+  (error) => {
+    console.log(`Error: ${error}`);
   }
-});
+);
 
 // getSquareIfEven((error, number) => {
 //     if (error) {
@@ -58,10 +59,11 @@ getPuzzle("3", (error, puzzle) => {
 
 // Making an HTTP request
 
-getCountry("MX", (error, country) => {
-  if (error) {
-    console.log(`The error was: ${error}`);
-  } else {
-    console.log(`Country name: ${country.name}`);
+getCountry("KR").then(
+  (country) => {
+    console.log(country.name);
+  },
+  (error) => {
+    console.log(`Error is: ${error}`);
   }
-});
+);
