@@ -13,46 +13,38 @@
 // Request = what do we want to do
 // Respons = What was actually done
 
-const puzzleEl = document.querySelector('#puzzle')
-const guessesEl = document.querySelector('#guessesRemaining')
-const game1 = new Hangman('Davidson LLC', 2)
+const puzzleEl = document.querySelector("#puzzle");
+const guessesEl = document.querySelector("#guessesRemaining");
+const game1 = new Hangman("Davidson LLC", 2);
 
+puzzleEl.textContent = game1.puzzle;
+guessesEl.textContent = game1.statusMessage;
 
-puzzleEl.textContent = game1.puzzle
-guessesEl.textContent = game1.statusMessage
-console.log(game1.status);
-
-window.addEventListener('keypress', (e) => {
-    const guess = String.fromCharCode(e.charCode)
-    game1.makeGuess(guess)
-    puzzleEl.textContent = game1.puzzle
-    guessesEl.textContent = game1.statusMessage
-    console.log(game1.status);
-})
+window.addEventListener("keypress", (e) => {
+  const guess = String.fromCharCode(e.charCode);
+  game1.makeGuess(guess);
+  puzzleEl.textContent = game1.puzzle;
+  guessesEl.textContent = game1.statusMessage;
+  console.log(game1.status);
+});
 
 // we are calling getPuzzle here and fetching the return value into the puzzle variable !!!!!!!!!!!
-getPuzzle((puzzle) => {
-    console.log(puzzle)
-})
 
+getPuzzle("3", (error, puzzle) => {
+  if (error) {
+    console.log(`Error is: ${error}`);
+  } else {
+    console.log(puzzle);
+  }
+});
 
-const result = regFunc(8)
-console.log(result);
-
-const cbresult = cbFunc(15)
-console.log(cbresult);
-
-
-
-
-
-
-
-
-
-
-
-
+// getSquareIfEven((error, number) => {
+//     if (error) {
+//         console.log(`Error is: ${error}`);
+//     } else {
+//         console.log(number);
+//     }
+// })
 
 // 1. Make a new request for all countries
 // 2. Parse the responseText to get back the array of objects
@@ -66,23 +58,10 @@ console.log(cbresult);
 
 // Making an HTTP request
 
-
-// const getCountry = (countryCode, callback) => {
-
-//     const countryRequest = new XMLHttpRequest()
-    
-//     countryRequest.addEventListener('readystatechange', (e) => {
-//         if (e.target.readyState === 4 && e.target.status === 200) {
-//             const data = JSON.parse(e.target.responseText)
-//             const country = data.find((country) => country.alpha2Code === countryCode)
-//             callback(undefined, country)
-//         } else if (e.target.readyState === 4) {
-//             callback('An error has taken place', undefined)
-//         }
-//     })
-    
-//     countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-//     countryRequest.send()
-
-
-
+getCountry("MX", (error, country) => {
+  if (error) {
+    console.log(`The error was: ${error}`);
+  } else {
+    console.log(`Country name: ${country.name}`);
+  }
+});
