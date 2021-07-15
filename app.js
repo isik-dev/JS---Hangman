@@ -21,13 +21,10 @@ getPuzzle(2)
     console.log(error);
   });
 
-getLocation()
-  .then((data) => {
-    return getCountry(data.country);
-  })
+getCurrentCountry()
   .then((country) => {
-    console.log(`You are now in ${country.name}`);
+    console.log(country.name);
   })
   .catch((error) => {
-    console.log(`Error: ${error}`);
+    console.log(error);
   });
