@@ -21,9 +21,12 @@ getPuzzle(2)
     console.log(error);
   });
 
-getCountry("US")
+getLocation()
+  .then((data) => {
+    return getCountry(data.country);
+  })
   .then((country) => {
-    console.log(country.name);
+    console.log(`You are now in ${country.name}`);
   })
   .catch((error) => {
     console.log(`Error: ${error}`);
