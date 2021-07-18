@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-    <head></head>
+    <head>
+        <title>Hangman</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="icon" href="/images/favicon.png">
+    </head>
     <body>
-        <h1>Hangman</h1>
-        <p id="puzzle">This is a puzzle</p>
-        <p id="guessesRemaining">This is how many guesses left to make</p>
-        <button id="reset">Reset</button>
+        <h1></h1>
+        <div>
+            <div id="puzzle" class="puzzle" ></div>
+            <p id="guessesRemaining" class="">This is how many guesses left to make</p>
+            <button id="reset" class="button">Reset</button>
+        </div>
         <script src="/scripts/requests.js"></script>
         <script src="/scripts/hangman.js"></script>
         <script src="/scripts/app.js"></script>
